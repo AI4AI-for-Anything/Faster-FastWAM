@@ -1,0 +1,11 @@
+{
+  "hardware": "8 GPUs; upstream LIBERO recipe task=libero_uncond_2cam224_1e-4 (16 samples per GPU, DeepSpeed ZeRO-1, BF16 mixed precision)",
+  "scope": "Cumulative configurations; time per training iteration of the repository's scripts/train.py. R01-R03 are timing screens against the frozen reference (1,541.9 ms); R04 is the full check of the final configuration against two fresh reference runs (its timing screen measured 441.1 ms, 3.50x).",
+  "rows": [
+    {"round": 1, "label": "Decode only the frames used", "check": "screen", "reference_ms": 1541.9, "candidate_ms": 626.7, "speedup": 2.4604},
+    {"round": 2, "label": "Inductor-compiled VAE encode", "check": "screen", "reference_ms": 1541.9, "candidate_ms": 583.3, "speedup": 2.6434},
+    {"round": 3, "label": "Regional compile of the MoT layers", "check": "screen", "reference_ms": 1541.9, "candidate_ms": 513.5, "speedup": 3.0027},
+    {"round": 4, "label": "Data path, no host syncs", "check": "full", "reference_ms": 1541.4, "candidate_ms": 445.7, "speedup": 3.4587,
+     "peak_allocated_gib": {"reference": 62.6, "candidate": 53.9}}
+  ]
+}
